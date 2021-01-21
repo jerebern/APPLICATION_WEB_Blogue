@@ -15,11 +15,18 @@
     <% end %>
   </div>
 
+
   <div>
     <%= form.label :status %><br>
     <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
   </div>
   <br>
+  <div>
+    <%= form.fields_for :picture do |picture_fields| %>
+      Name  : <%=picture_fields.text_field :name %>
+      Fichier: <%= picture_fields.file_field :image %>
+    <% end %>
+  </div>
 
   <div>
     <%= form.submit %>

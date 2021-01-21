@@ -4,6 +4,7 @@
   <% @articles.each do |article| %>
     <% unless article.archived? %>
       <li>
+       <%= image_tag(article.picture.image, {size: "200x200"})%>
         <%= link_to article.title, article %>
       </li>
     <% end %>

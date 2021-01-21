@@ -10,12 +10,17 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = Article.new
+    @article = Article.new(picture: Picture.new)
   end
+
+  def have_picture?
+    return self.picture && self.picture.image.attached?
+  end
+
 
   def create
     @article = Article.new(article_params)
-
+    @article.picture.image = params[:article][:picture_attributes][:image]
     if @article.save
       redirect_to @article
     else
@@ -46,6 +51,7 @@ class ArticlesController < ApplicationController
 
   private
     def article_params
-      params.require(:article).permit(:article, :title, :body, :status)
+
+      params.require(:article).permit(:article, :title, :body, :status, picture_attributes: [ :id, :name, :image ])
     end
 end
