@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Blog</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -9,7 +10,12 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="p-3 mb-2 bg-dark">
+  <nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="/">
+    Acceuil
+  </a>
+  </nav>
     <%= yield %>
   </body>
 </html>

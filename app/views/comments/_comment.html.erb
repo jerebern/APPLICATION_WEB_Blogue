@@ -1,3 +1,4 @@
+<li class="list-group-item">
 <p>
   <strong>Commenter:</strong>
   <%= comment.commenter %>
@@ -7,7 +8,7 @@
   <strong>Comment:</strong>
   <%= comment.body %>
 </p>
-
+</li>
 <p>
   <%= link_to 'Destroy Comment', [comment.article, comment],
                method: :delete,

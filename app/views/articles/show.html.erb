@@ -1,17 +1,23 @@
+
+<div class="jumbotron text-center">
 <h1><%= @article.title %></h1>
+</div>
+<ul class="list-group">
+<li class="list-group-item list-group-item-secondary"><p><%= @article.body %></p> 
+<%= image_tag(@article.picture.image, class:"rounded float-right", :style => "width:100px;")%>
+</li>
 
-<p><%= @article.body %></p>
-
-<ul>
-  <li><%= link_to "Edit", edit_article_path(@article) %></li>
-  <li><%= link_to "Destroy", article_path(@article),
+  <li class="list-group-item list-group-item-warning"><%= link_to "Edit", edit_article_path(@article) %></li>
+  <li class="list-group-item list-group-item-danger"><%= link_to "Destroy", article_path(@article),
                   method: :delete,
                   data: { confirm: "Are you sure?" } %></li>
 </ul>
+<h2 class="text-light text-center">Commentaires</h2>
+<ul class="list-group">
 
-<h2>Comments</h2>
 <%= render @article.comments %>
-
-<h2>Add a comment:</h2>
+</ul>
+<h2  class="text-light text-center">Ajouter un commentaire:</h2>
 <%= render 'comments/form' %>
 
+  

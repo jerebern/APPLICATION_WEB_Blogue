@@ -13,11 +13,6 @@ class ArticlesController < ApplicationController
     @article = Article.new(picture: Picture.new)
   end
 
-  def have_picture?
-    return self.picture && self.picture.image.attached?
-  end
-
-
   def create
     @article = Article.new(article_params)
     @article.picture.image = params[:article][:picture_attributes][:image]

@@ -1,19 +1,20 @@
 <%= form_with model: [ @article, @article.comments.build ] do |form| %>
-  <p>
+  <p class="text-light">
     <%= form.label :commenter %><br>
-    <%= form.text_field :commenter %>
+    <%= form.text_field :commenter,  class: "form-control" %>
   </p>
-  <p>
+  <p class="text-light">
     <%= form.label :body %><br>
-    <%= form.text_area :body %>
+    <%= form.text_area :body ,class:"form-control"%>
   </p>
 
-  <p>
+  <p class="text-light">
     <%= form.label :status %><br>
-    <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+    <%= form.select :status, ['public', 'private', 'archived'], selected: 'public',class:"form-control" %>
   </p>  
 
   <p>
-    <%= form.submit %>
+  <%= button_to "Ajouter un Commentaire " , articles_path ,class: 'btn btn-primary' , :method => "post"%>
   </p>
+
 <% end %>

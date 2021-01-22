@@ -1,34 +1,38 @@
 <%= form_with model: article do |form| %>
   <div>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
+    <%= form.label :title, class:"text-light" %><br>
+    <%= form.text_field :title ,  class: "form-control"%>
     <% article.errors.full_messages_for(:title).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
 
   <div>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %><br>
+    <%= form.label :body, class:"text-light" %><br>
+    <%= form.text_area :body ,  class: "form-control"%><br>
     <% article.errors.full_messages_for(:body).each do |message| %>
-      <div><%= message %></div>
+      <div>
+      <%= message %>
+      </div>
     <% end %>
   </div>
 
-
   <div>
-    <%= form.label :status %><br>
-    <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+    <%= form.label :status, class:"text-light" %><br>
+    <%= form.select :status, ['public', 'private', 'archived'], selected: 'public',  class: "form-control" %>
   </div>
   <br>
   <div>
     <%= form.fields_for :picture do |picture_fields| %>
-      Name  : <%=picture_fields.text_field :name %>
-      Fichier: <%= picture_fields.file_field :image %>
+      <p class="text-light">Nom  : </p><%=picture_fields.text_field :name ,  class: "form-control"%>
+      <br>
+      <p class="text-light">
+      Fichier: </p><%= picture_fields.file_field :image,  class: "form-control" %>
     <% end %>
   </div>
 
   <div>
-    <%= form.submit %>
+  <br>
+   <%= button_to "Ajouter un L'article " , articles_path ,class: 'btn btn-primary' , :method => "post"%>
   </div>
 <% end %>
