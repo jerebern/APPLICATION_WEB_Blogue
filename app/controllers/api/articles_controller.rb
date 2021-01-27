@@ -1,16 +1,17 @@
-class ArticlesController < ApplicationController
-  http_basic_authenticate_with name: "etd", password: "shawi", except: [:index, :show]
-
+class Api::ArticlesController < ApiController
   def index
     @articles = Article.all
+    render json: @articles
   end
 
   def show
     @article = Article.find(params[:id])
+    render json: @article
   end
 
   def new
     @article = Article.new
+
   end
 
   def create
@@ -25,6 +26,7 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
+    render json: @article
   end
 
   def update
