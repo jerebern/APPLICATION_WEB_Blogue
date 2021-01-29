@@ -1,5 +1,5 @@
 class Api::CommentsController < ApiController
-before_action :set_comment, only: [:show] 
+
   def create
     @article = Article.find(params[:article_id])
     puts(:params)

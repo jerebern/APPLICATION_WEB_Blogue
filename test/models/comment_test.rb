@@ -28,6 +28,21 @@ class CommentTest < ActiveSupport::TestCase
       comment = Comment.new(commenter: 'test',body:"ASSERT TEST" , status:"public", article_id:-1 )
       assert_not comment.save , "Article not saving when does'nt have article id"
     end
-    
+
+    test "Must return true when deleting comment" do
+      assert Comment.destroy(0)
+    end
+    test "Must return ReccordNotFound on not comment when deleting not existing comment" do
+      assert_raises(ActiveRecord::RecordNotFound) do
+      Comment.destroy(666)
+      end
+    end
+    test "Must return ReccordNotFound when comment not found" do
+      assert_raises(ActiveRecord::RecordNotFound) do
+      Comment.destroy(666)
+      end
+    end
+
+
 
 end
