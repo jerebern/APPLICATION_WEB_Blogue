@@ -1,13 +1,61 @@
 <h1>Articles</h1>
+   <textarea id="RawdataArticles" name="dataRaw" rows="10" cols="100"> </textarea>
+<br>
+<p #id="currentAricle"></p>
+<input type="text" id="idBox" value=""/>
+<button id="GetArticlesButton"> 1.Articles</button>
+<button id="GetArticleButton"> 2.Get Comments from Article</button>
+<button id="GetCommentInfoButton">3. Get One Comment from current article</button>
+<button id="DeleteCommentButton"> 4.Delete Comment</button>
 
-<ul>
-  <% @articles.each do |article| %>
-    <% unless article.archived? %>
-      <li>
-        <%= link_to article.title, article %>
-      </li>
-    <% end %>
-  <% end %>
-</ul>
+<div id="PostCommentForm">
+<p> Post Comment on current article</p>
+<input type="text" id="idBoxTitle" value="title"/>
+<br>
+<textarea id=bodyComment>Enter some text..</textarea>
+<br>
+<button id="PostComment">Post </button>
+</div>
+<script> 
 
-<%= link_to "New Article", new_article_path %>
+  var currentAricle;
+  sendData("articles","api/articles","get");
+  $("#PostCommentForm").hide();
+  $("#GetArticlesButton").click(function(){
+      sendData("articles","api/articles","get");
+      console.log($("#idBox").val()); 
+      $("#PostCommentForm").hide();
+  })
+
+  $("#GetArticleButton").click(function(){
+      sendData("","api/articles/"+$("#idBox").val()+"/comments","get");
+      currentAricle = $("#idBox").val(); 
+      $("#PostCommentForm").show();
+  })
+    $("#GetCommentInfoButton").click(function(){
+      sendData("","api/articles/"+currentAricle+"/comments/"+$("#idBox").val(),"get");
+  })
+    $("#PostComment").click(function(){
+      sendData({comment:{commenter:$("#idBoxTitle").val(), body:$("#bodyComment").val(), status:"public"}},"api/articles/" + currentAricle + "/comments/","post");
+  })
+  $("#DeleteCommentButton").click(function(){
+         sendData("","api/articles/"+currentAricle+"/comments/"+$("#idBox").val(),"DELETE"); 
+  })
+
+
+
+    function sendData(articles, url, method) {
+    $.ajax({
+      method: method,
+      url: url,
+      data: articles,
+      dataType: "json"
+    }).done(function( msg ){
+      $('#RawdataArticles').val(JSON.stringify(msg));
+      
+    }).fail(function(xhr, msg){
+
+      $('#RawdataArticles').val(JSON.stringify(msg)); 
+    })}; 
+
+</script>
